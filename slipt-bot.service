@@ -1,0 +1,21 @@
+# systemd service — alternative to PM2
+# Copy to: /etc/systemd/system/slipt-bot.service
+# Then: systemctl daemon-reload && systemctl enable slipt-bot && systemctl start slipt-bot
+
+[Unit]
+Description=Slipt Telegram Bot v6
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/slipt_bot
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
